@@ -10,3 +10,5 @@ after_success:
   - docker build -t timokito/multi-nginx ./nginx 
   - docker build -t timokito/multi-server ./server 
   - docker build -t timokito/multi-worker ./worker
+
+  

@@ -2,13 +2,20 @@ sudo: required
 services: 
   - docker
 before_install: 
-  - docker build -t timokito/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t bordezangakombo/react-test -f ./client/Dockerfile.dev ./client
 script:
   - docker run -e CI=true timokito/react-test npm test
 after_success: 
-  - docker build -t timokito/multi-client ./client
-  - docker build -t timokito/multi-nginx ./nginx 
-  - docker build -t timokito/multi-server ./server 
-  - docker build -t timokito/multi-worker ./worker
+  - docker build -t bordezangakombo/multi-client ./client
+  - docker build -t bordezangakombo/multi-nginx ./nginx 
+  - docker build -t bordezangakombo/multi-server ./server 
+  - docker build -t bordezangakombo/multi-worker ./worker
+  #log in to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push bordezangakombo/multi-client
+  - docker push bordezangakombo/multi-nginx
+  - docker push bordezangakombo/multi-server
+  - docker push bordezangakombo/multi-worker
 
-  
+

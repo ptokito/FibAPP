@@ -4,7 +4,7 @@ services:
 before_install: 
   - docker build -t bordezangakombo/react-test -f ./client/Dockerfile.dev ./client
 script:
-  - docker run -e CI=true timokito/react-test npm test
+  - docker run -e CI=true bordezangakombo/react-test npm test
 after_success: 
   - docker build -t bordezangakombo/multi-client ./client
   - docker build -t bordezangakombo/multi-nginx ./nginx 

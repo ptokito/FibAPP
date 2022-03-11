@@ -1,0 +1,38 @@
+{
+    "AWSEBDockerrunVersion": 2, 
+    "containerDefinitions": [
+    {
+        "name": "client",
+        "image": "bordezangakombo/multi-client",
+        "hostname": "client",
+        "essential": false
+
+    },
+    {
+        "name": "server",
+        "image": "bordezangakombo/multi-server",
+        "hostname": "api",
+        "essential": false
+    },
+    {
+        "name": "worker",
+        "image": "bordezangakombo/multi-worker",
+        "hostname": "worker",
+        "essential": false
+
+    },
+    {
+        "name": "nginx",
+        "image": "bordezangakombo/multi-nginx",
+        "hostname": "nginx",
+        "essential": true,
+        "portMappings": [ 
+            {
+                "hostPort": 80,
+                "containerPort": 80
+            }
+        ],
+        "links":["client", "server"]
+    }
+    ]
+}
